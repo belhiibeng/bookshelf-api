@@ -46,7 +46,8 @@ const addBookHandler = (request, h) => {
   if (newBook.readPage > pageCount) {
     const response = h.response({
       status: 'fail',
-      message: 'Gagal menambahkan buku. readPage tidak boleh lebih besar dari pageCount',
+      message:
+        'Gagal menambahkan buku. readPage tidak boleh lebih besar dari pageCount',
     });
 
     response.code(400);
@@ -78,26 +79,25 @@ const addBookHandler = (request, h) => {
 };
 
 const getAllBooksHandler = (request, h) => {
-  const {
-    name,
-    reading,
-    finished,
-  } = request.query;
+  const { name, reading, finished } = request.query;
 
   let filteredBooks = books;
 
   if (name !== undefined) {
-    filteredBooks = filteredBooks.filter(
-      (book) => book.name.toLowerCase().includes(name.toLowerCase()),
-    );
+    filteredBooks = filteredBooks.filter((book) => book.name.toLowerCase()
+      .includes(name.toLowerCase()));
   }
 
   if (reading !== undefined) {
-    filteredBooks = filteredBooks.filter((book) => Number(book.reading) === Number(reading));
+    filteredBooks = filteredBooks.filter(
+      (book) => Number(book.reading) === Number(reading),
+    );
   }
 
   if (finished !== undefined) {
-    filteredBooks = filteredBooks.filter((book) => Number(book.finished) === Number(finished));
+    filteredBooks = filteredBooks.filter(
+      (book) => Number(book.finished) === Number(finished),
+    );
   }
 
   const listedBooks = filteredBooks.map((book) => ({
@@ -165,7 +165,8 @@ const editBookByIdHandler = (request, h) => {
   if (readPage > pageCount) {
     const response = h.response({
       status: 'fail',
-      message: 'Gagal memperbarui buku. readPage tidak boleh lebih besar dari pageCount',
+      message:
+        'Gagal memperbarui buku. readPage tidak boleh lebih besar dari pageCount',
     });
 
     response.code(400);
